@@ -47,7 +47,7 @@ function nextPage() {
         } else {
             createFinalScreen();
         } 
-    },1000*6.3);
+    },1000*4.8);
 }
 // function at the start of the game to bring up start button
 function startGame(){
@@ -151,7 +151,7 @@ function createFinalScreen(){
         } else if (incrct/questions.length >= 0.5) {
             $('#finalMessage').text("Pretty good, but I think it's time to rewatch the show!")
         }
-    },1000*2);
+    },1000*1.2);
 };
 // This resets the game and sets variables back to 0 or their starting positions
 $('body').on('click','.resetBtn',function(){
