@@ -1,13 +1,13 @@
 
 // define global variables
 var timer;
-var t = 30;
+var t = 31;
 var crct = 0;
 var incrct = 0;
 var number = t;
 var wrongAns = ['Not quite!','Nope!','Wrong!','Sorry!'];
 var rightAns = ["That's right!", "Correct!", "Look at you!", "Way to go!", "You got it!"];
-var questions = ['In which state does Breaking Bad take place?', 'What type of Cancer does Walt have?','What is the name of the episode in which Gus dies?','What drink does Gale try to perfect?','What store does Saul picture himself managing in his new life?', 'Where do Skyler and Walt say all their extra money is from?','How does Hector communicate?',"What kind of business is Gus's superlab underneath?"];
+var questions = ['In which state does Breaking Bad take place?', 'What type of cancer does Walt have?','What is the name of the episode in which Gus dies?','What drink does Gale try to perfect?','What store does Saul picture himself managing in his new life?', 'Where do Skyler and Walt say all their extra money is coming from?','How does Don Hector communicate?',"What kind of business is Gus's superlab underneath?"];
 var answers = [['New Mexico', 'Arizona', 'California', 'Utah'], ['Brain Cancer', 'Skin Cancer', 'Lymphoma', 'Lung Cancer'], ['All Blown Up', 'Face Off', 'Death of a King', 'Coming of Age'],['Beer','Coffee','Fruit Juice','Iced Tea'],['Subway','Pizza Hut','Cinnabon',"Pete's Coffee"],['The death of a rich relative','A large promotion','Selling expensive furniture',"Walt's gambling addiction"],['Ringing a bell','Blinking','Writing','Sign Language'],['Fastfood chicken restaurant','Laundromat','Carwash','Bookstore']]; 
 var crctAnswers = ['New Mexico','Lung Cancer','Face Off','Coffee','Cinnabon', "Walt's gambling addiction", 'Ringing a bell','Laundromat']
 //allows game to iterate through through each array as a questionCount
@@ -18,7 +18,7 @@ function rdm(arr) {
     return num;
 }; 
 
-//FOR FUTURE VERSION
+// FOR FUTURE VERSION
 // function buttons() {
 //     for (var i=0; i<4; i++) {
 //         if (answers[questionCount][i] === crctAnswers[questionCount]){
@@ -151,7 +151,7 @@ function startTimer() {
 
 function countdown() {
     number -=1;
-    $('#timer').text('Time Left: ' + number);
+    $('#timer').text('Time Remaining: ' + number);
     if (number === 0) {
         clearInterval(timer);
         createTimeUp();
