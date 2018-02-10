@@ -7,12 +7,15 @@ var incrct = 0;
 var number = t;
 var wrongAns = ['Not quite!','Nope!','Wrong!','Sorry!'];
 var rightAns = ["That's right!", "Correct!", "Look at you!", "Way to go!", "You got it!"];
-var questions = ['In which state does Breaking Bad take place?', 'What type of cancer does Walt have?','What is the name of the episode in which Gus dies?','What drink does Gale try to perfect?','What store does Saul picture himself managing in his new life?', 'Where do Skyler and Walt say all their extra money is coming from?','How does Don Hector communicate?',"What kind of business is Gus's superlab underneath?"];
-var answers = [['New Mexico', 'Arizona', 'California', 'Utah'], ['Brain Cancer', 'Skin Cancer', 'Lymphoma', 'Lung Cancer'], ['All Blown Up', 'Face Off', 'Death of a King', 'Coming of Age'],['Beer','Coffee','Fruit Juice','Iced Tea'],['Subway','Pizza Hut','Cinnabon',"Pete's Coffee"],['The death of a rich relative','A large promotion','Selling expensive furniture',"Walt's gambling addiction"],['Ringing a bell','Blinking','Writing','Sign Language'],['Fastfood chicken restaurant','Laundromat','Carwash','Bookstore']]; 
-var crctAnswers = ['New Mexico','Lung Cancer','Face Off','Coffee','Cinnabon', "Walt's gambling addiction", 'Ringing a bell','Laundromat']
+var questions = ['In which state does Breaking Bad take place?', 'What type of cancer does Walt have?','What is the name of the episode in which Gus dies?','What drink does Gale try to perfect?','What mall food business does Saul picture himself managing in his new life?', 'Where do Skyler and Walt say all their extra money is coming from?','How does Hector Salamanca communicate?',"Underneath what kind of business is Gus' superlab?"];
+var answers = [['New Mexico', 'Arizona', 'California', 'Utah'], ['Brain Cancer', 'Skin Cancer', 'Lymphoma', 'Lung Cancer'], ['All Blown Up', 'Face Off', 'Death of a King', 'Coming of Age'],['Beer','Coffee','Fruit Juice','Iced Tea'],['Sbarro',"Auntie Anne's",'Cinnabon',"Panda Express"],['The death of a rich relative','A large promotion','Selling expensive furniture',"Walt's gambling addiction"],['By ringing a bell','By blinking','By writing','With Sign Language'],['Fastfood chicken restaurant','Laundromat','Carwash','Bookstore']]; 
+var crctAnswers = ['New Mexico','Lung Cancer','Face Off','Coffee','Cinnabon', "Walt's gambling addiction", 'By ringing a bell','Laundromat']
+var gifArr = ['<img src="assets/images/q1.gif">','<img src="assets/images/q2.gif">','<img src="assets/images/q3.gif">','<img src="assets/images/q4.gif">','<img src="assets/images/q5.gif">','<img src="assets/images/q6.gif">','<img src="assets/images/q7.gif">','<img src="assets/images/q8.gif">']
 //allows game to iterate through through each array as a questionCount
-var questionCount = 0
+var questionCount = 0;
+var unanswr = 0;
 var startPage;
+var openningText;
 function rdm(arr) {
     var num = Math.floor(Math.random()*arr.length);
     return num;
@@ -44,13 +47,16 @@ function nextPage() {
         } else {
             createFinalScreen();
         } 
-    },1000*5);
+    },1000*6.3);
 }
 // function at the start of the game to bring up start button
 function startGame(){
     startPage = '<button class="btn startBtn btn-primary btn-lg"id="start">START</button>';
     $('.startDiv').html(startPage);
-    $('.questionDiv').empty();
+    openningText = '<div class="panel-default text-center" id="questionArea"><h2 id="title"></h2><div class="row text-center"><div class="col-xs-offset-1 col-xs-10"><h3 id="questiontext"></div>'
+    $('.questionDiv').html(openningText);
+    $('#title').text('Test your knowledge of the hit TV show!');
+    $('#questiontext').text('Hit the start button below to get going');
 
 };
 
@@ -84,7 +90,7 @@ function createAnswerArea(){
     questionArea = '<div class="panel-default text-center" id="questionArea"><h2 id="title"></h2><div class="row text-center"><div class="col-xs-offset-1 col-xs-10"><h3 id="questiontext">' + crctAnswers[questionCount] + ' was the correct answer</h3></div></div></div>';
     $('.questionDiv').html(questionArea);
     $('#title').text(rightAns[rdm(rightAns)]);
-    $('.answerDiv').empty();
+    $('.answerDiv').html(gifArr[questionCount]);
     $('#timer').hide();
     nextPage();
  };
@@ -95,7 +101,7 @@ function createAnswerArea(){
     questionArea = '<div class="panel-default text-center" id="questionArea"><h2 id="title"></h2><div class="row text-center"><div class="col-xs-offset-1 col-xs-10"><h3 id="questiontext">' + crctAnswers[questionCount] + ' was the correct answer</h3></div></div></div>';
     $('.questionDiv').html(questionArea);
     $('#title').text(wrongAns[rdm(wrongAns)]);
-    $('.answerDiv').empty();
+    $('.answerDiv').html(gifArr[questionCount]);
     $('#timer').hide();
     nextPage();
     
@@ -103,10 +109,11 @@ function createAnswerArea(){
 
  //This creates the screen for when time is up
  function createTimeUp(){
+    unanswr++;
     questionArea = '<div class="panel-default text-center" id="questionArea"><h2 id="title"></h2><div class="row text-center"><div class="col-xs-offset-1 col-xs-10"><h3 id="questiontext">' + crctAnswers[questionCount] + ' was the correct answer</h3></div></div></div>';
     $('.questionDiv').html(questionArea);
     $('#title').text("Time's Up!");
-    $('.answerDiv').empty();
+    $('.answerDiv').html(gifArr[questionCount]);
     $('#timer').hide();
     nextPage();
   
@@ -129,16 +136,29 @@ function createAnswerArea(){
 
  //This function sets up the final screen to show the score
 function createFinalScreen(){
-    questionArea = '<div class="panel-default text-center" id="questionArea"><h2 id="title">How did you do?:</h2><div class="row text-center"><div class="col-xs-offset-1 col-xs-10"><h3 id="questiontext"><p id="crctTotal">Correct Answers: ' + crct + '</p><p id="incrctTotal">Incorrect Answers: ' + incrct + '</p><p id="unansTotal">Unanswered: ' + (questions.length - incrct - crct) + '</p></h3></div></div></div>';
+    questionArea = '<div class="panel-default text-center" id="questionArea"><h2 id="title">How did you do?:</h2><div class="row text-center"><div class="col-xs-offset-1 col-xs-10"><h3 id="questiontext"><p id="crctTotal">Correct Answers: ' + crct + '</p><p id="incrctTotal">Incorrect Answers: ' + incrct + '</p><p id="unansTotal">Unanswered: ' + unanswr + '</p><br><p id="finalMessage"></p></h3></div></div></div>';
     $('.questionDiv').html(questionArea);
+    $('.answerDiv').empty();
     resetBtn = '<button class="btn resetBtn btn-primary btn-lg"id="reset">RESET GAME</button>';
+    setTimeout(function(){
     $('.startDiv').html(resetBtn);
-}
+        if (crct/questions.length >= 0.8) {
+            $('#finalMessage').text('Wow! You really know your stuff!')
+        } else if (crct/questions.length > 0.5) {
+            $('#finalMessage').text('Ooo! You were close. Want to try again?')
+        } else if (incrct/questions.length > 0.75 || unanswr/questions.length > 0.5) {
+            $('#finalMessage').text('Yikes! Did you even watch the show?')
+        } else if (incrct/questions.length >= 0.5) {
+            $('#finalMessage').text("Pretty good, but I think it's time to rewatch the show!")
+        }
+    },1000*2);
+};
 // This resets the game and sets variables back to 0 or their starting positions
 $('body').on('click','.resetBtn',function(){
     questionCount = 0;
     crct = 0;
     incrct = 0;
+    unanswr = 0;
     number = t;
     startGame();
 
