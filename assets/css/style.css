@@ -1,0 +1,38 @@
+@font-face {
+    font-family: BreakingBad;
+    src: url(../images/HeartBreakingBad.otf);
+}
+
+#ans1,
+#ans2,
+#ans3,
+#ans4{
+    margin-bottom: 15px;
+    margin-right: 15px;
+}
+
+body{
+    background-image: url(../images/BBbackground.png);
+    background-position-x: -50px;
+    background-position-y: 50px;
+    background-size: 120%
+}
+
+h1{
+    font-family: BreakingBad;
+    font-size: 120px;
+    color: white;
+}
+h2{
+    font-size: 50px;
+    color: black;
+    font-weight: bold;
+    
+}
+
+
+h3{
+    font-size:  30px;
+    color: black;
+    font-weight: bold;
+}
